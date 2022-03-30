@@ -1,0 +1,3 @@
+[submodule "latex/academic-articles"]
+	path = latex/academic-articles
+	url = https://github.com/mhar-vell/academic-articles.git
