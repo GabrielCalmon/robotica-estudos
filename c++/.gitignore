@@ -1,0 +1,14 @@
+*
+
+# nao ignora os sub-diretorios
+!desafios/
+!simple tutorials/
+!source/
+!.vscode/
+
+# nao ignora as seguintes extensoes
+!*.cpp
+!.json
+
+# nao ignora o proprio .gitignore
+!.gitignore
