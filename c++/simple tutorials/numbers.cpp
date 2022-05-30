@@ -15,7 +15,7 @@ int main()
     cout << "Divisão entre inteiros: " << 10/3 << endl;
     cout << "Divisão entre decimais: " << 10.0/3.0 << endl;
 
-    cout << pow(2,5) << endl;
+    
 
     return 0;
 }
