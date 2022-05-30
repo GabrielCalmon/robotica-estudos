@@ -2,10 +2,12 @@
 using namespace std;
 
 class PlayerClass {
+    private:
+        string unique_code;
+        int currentHp;
     public:
         string name;
         int maxHp;
-        int currentHp;
 
         PlayerClass(){
             name = "espectador";
@@ -26,7 +28,18 @@ class PlayerClass {
             return false;
         }
 
-         
+         void changeHp(int newHp){
+             if(newHp<0){
+                newHp = 0;
+             } else if(newHp>maxHp){
+                newHp = maxHp;
+             }
+            currentHp = newHp;
+         }
+
+         int getCurrentHp(){
+            return currentHp;
+         }
 };
 
 int main()
@@ -34,6 +47,7 @@ int main()
     PlayerClass player1("peter", 100);
     PlayerClass player2("carl", 75);
     PlayerClass guest();
+
 
     return 0;
 }
