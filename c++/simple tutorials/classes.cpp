@@ -40,6 +40,17 @@ class PlayerClass {
          int getCurrentHp(){
             return currentHp;
          }
+
+         void UseEspecialMove(){
+             cout << "Movimento especial utilizado" << endl;
+         }
+};
+
+class EspecialPlayer : public PlayerClass{
+    // overriding function
+        void UseEspecialMove(){
+             cout << "Movimento especial utilizado pelo super player" << endl;
+         }
 };
 
 int main()
