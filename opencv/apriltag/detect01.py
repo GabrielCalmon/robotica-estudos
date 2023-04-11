@@ -60,7 +60,7 @@ while(not stop):
         zrot2d = (int(zrot[0]*100), int(zrot[1]*100))
         cv.line(img, (cX, cY), (cX+xrot2d[0], cY+xrot2d[1]), (0, 0, 255), 4)
         cv.line(img, (cX, cY), (cX+yrot2d[0], cY+yrot2d[1]), (0, 255, 0), 4)
-        cv.line(img, (cX, cY), (cX+zrot2d[0], cY+zrot2d[1]), (255, 0, 0), 4)
+        cv.line(img, (cX, cY), (cX-zrot2d[0], cY-zrot2d[1]), (255, 0, 0), 4)
         # print(f'fixo: ({cX}, {cY})')
         # print(f'movel: ({xrot2d})')
     
@@ -73,4 +73,5 @@ vid.release()
 cv.destroyAllWindows()
 
 # materiais de apoio: 
-# -> https://docs.opencv.org/3.4/d7/d53/tutorial_py_pose.html
+# -> base: https://www.youtube.com/watch?v=H77ieFq5mQ8&t=263s
+# -> projecao de pontoshttps://docs.opencv.org/3.4/d7/d53/tutorial_py_pose.html
