@@ -13,32 +13,32 @@ vid = cv.VideoCapture(0)
 stop = False
 
 while(not stop):
-    ret, img = vid.read()
-    #img=cv.flip(img, 1)
+    ret, img = vid.read()   #captura video
  
-    imgGray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    imgGray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)   # converte para preto e branco
 
     options = apriltag.DetectorOptions(families="tag36h11")
     options.tag_size = 15
-    options.camera_params = (765.00, 764.18, 393.72, 304.66)
+    options.camera_params = (765.00, 764.18, 393.72, 304.66)    # valores arbitrarios, ja que nao foi feita a calibracao
     detector = apriltag.Detector(options)
     
     results = detector.detect(imgGray)
 
-    #print(f'[INFO] {len(results)} total AprilTags detected')
+    # para cada objeto detectado:
     for r in results:
         pose, e0, e1 = detector.detection_pose(r,
                                                   options.camera_params,
                                                   options.tag_size)
-        #print(f'{pose}')
+        #pose -> matriz de transformacao 4x4, e0 -> erro inicial, e1 -> erro final
         xrot=pose[:3, 0]
         yrot=pose[:3, 1]
         zrot=pose[:3, 2]
         dist_transf=pose[:3, 3]
         dist = pow(dist_transf[0]**2 + dist_transf[1]**2 + dist_transf[2]**2 ,0.5)  # calcula o modulo da distancia 
-        print(f'{dist} cm')
+        print(f'{dist:.2f} cm') # e uma estimativa
         #print(f'{pose}')
-        (topLeft, topRight, bottomRight, bottomLeft) = r.corners
+        (topLeft, topRight, bottomRight, bottomLeft) = r.corners    # separa os vertices do retangulo de deteccao em diferentes variaveis
+        # remove a componente z
         topLeft = (int(topLeft[0]), int(topLeft[1]))
         topRight = (int(topRight[0]), int(topRight[1]))
         bottomRight = (int(bottomRight[0]), int(bottomRight[1]))
@@ -54,7 +54,7 @@ while(not stop):
         (cX, cY) = (int(r.center[0]), int(r.center[1]))
         cv.circle(img, (cX, cY), 5, (0,0,255), -1)
 
-        #desenha eixos
+        #desenha eixos xyz
         xrot2d = (int(xrot[0]*100), int(xrot[1]*100))
         yrot2d = (int(yrot[0]*100), int(yrot[1]*100))
         zrot2d = (int(zrot[0]*100), int(zrot[1]*100))
@@ -63,10 +63,14 @@ while(not stop):
         cv.line(img, (cX, cY), (cX+zrot2d[0], cY+zrot2d[1]), (255, 0, 0), 4)
         # print(f'fixo: ({cX}, {cY})')
         # print(f'movel: ({xrot2d})')
- 
-    cv.imshow("teste", img)
+    
+    imgShow=cv.flip(img, 1) # espelha a imagem, apenas para fins de apresentacao
+    cv.imshow("tag Detector", imgShow)
     if cv.waitKey(1) & 0xFF == ord('q'):
-            stop = True
+        stop = True
 
 vid.release()
 cv.destroyAllWindows()
+
+# materiais de apoio: 
+# -> https://docs.opencv.org/3.4/d7/d53/tutorial_py_pose.html
