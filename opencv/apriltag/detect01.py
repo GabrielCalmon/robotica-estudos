@@ -14,6 +14,7 @@ stop = False
 
 while(not stop):
     ret, img = vid.read()
+    #img=cv.flip(img, 1)
  
     imgGray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
@@ -35,8 +36,8 @@ while(not stop):
         zrot=pose[:3, 2]
         dist_transf=pose[:3, 3]
         dist = pow(dist_transf[0]**2 + dist_transf[1]**2 + dist_transf[2]**2 ,0.5)  # calcula o modulo da distancia 
-        #print(f'{dist} cm')
-        print(f'{pose}')
+        print(f'{dist} cm')
+        #print(f'{pose}')
         (topLeft, topRight, bottomRight, bottomLeft) = r.corners
         topLeft = (int(topLeft[0]), int(topLeft[1]))
         topRight = (int(topRight[0]), int(topRight[1]))
@@ -53,8 +54,16 @@ while(not stop):
         (cX, cY) = (int(r.center[0]), int(r.center[1]))
         cv.circle(img, (cX, cY), 5, (0,0,255), -1)
 
-
-        
+        #desenha eixos
+        xrot2d = (int(xrot[0]*100), int(xrot[1]*100))
+        yrot2d = (int(yrot[0]*100), int(yrot[1]*100))
+        zrot2d = (int(zrot[0]*100), int(zrot[1]*100))
+        cv.line(img, (cX, cY), (cX+xrot2d[0], cY+xrot2d[1]), (0, 0, 255), 4)
+        cv.line(img, (cX, cY), (cX+yrot2d[0], cY+yrot2d[1]), (0, 255, 0), 4)
+        cv.line(img, (cX, cY), (cX+zrot2d[0], cY+zrot2d[1]), (255, 0, 0), 4)
+        # print(f'fixo: ({cX}, {cY})')
+        # print(f'movel: ({xrot2d})')
+ 
     cv.imshow("teste", img)
     if cv.waitKey(1) & 0xFF == ord('q'):
             stop = True
