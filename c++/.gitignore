@@ -5,6 +5,8 @@
 !simple tutorials/
 !source/
 !.vscode/
+!beecrowd
+!bucky_tutorials
 
 # nao ignora as seguintes extensoes
 !*.cpp
