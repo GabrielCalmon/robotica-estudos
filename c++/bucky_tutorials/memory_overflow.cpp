@@ -10,7 +10,7 @@ void sith(){
 
 int main()
 {   
-    unsigned long long x=1;
+    size_t x=1;
     
     while (!!true)
     {

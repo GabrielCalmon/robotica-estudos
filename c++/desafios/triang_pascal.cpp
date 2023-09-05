@@ -43,7 +43,7 @@ int main()
     
     int elementsPerLine = 1;    // variável reponsável por contralar quantos elementos cada linha tem, crescendo uma unidade por nova linha
 
-    cout << "Esse é o triângulo de Pascal gerado";
+    cout << "Esse é o triângulo de Pascal gerado" << endl;
     for(int l =0; l < lineInput; l++){
         for(int c = 0; c < elementsPerLine; c++){
             if(c == 0 || c == elementsPerLine-1){
